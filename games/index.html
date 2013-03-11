@@ -1,0 +1,16 @@
+{% if latest_games_list %}
+    <ul>
+    {% for game in latest_games_list %}
+        <ul>
+        <h3>{{ game.DateTime }}</h3>
+        <h4>At {{game.location}} vs. {{game.opponent}}</h4>
+        <h4>Roster:</h4>
+        {% for player in game.players.all %}
+            <ul>{{player}}</ul>
+        {% endfor %}
+        </ul>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No games are scheduled.</p>
+{% endif %}

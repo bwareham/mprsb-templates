@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8" />
+
+  <!-- Set the viewport width to device width for mobile -->
+  <meta name="viewport" content="width=device-width" />
+
+  <title>{% block title %}{% endblock %}</title>
+  
+  <!-- Included CSS Files (Uncompressed) -->
+  <!--
+  <link rel="stylesheet" href="stylesheets/foundation.css">
+  -->
+  
+  <!-- Included CSS Files (Compressed) -->
+  <link rel="stylesheet" href="/static/stylesheets/foundation.min.css">
+  <link rel="stylesheet" href="/static/stylesheets/app.css">
+
+  <script src="/static/javascripts/modernizr.foundation.js"></script>
+</head>
+<body>
+	<div class="row">
+		<div class="twelve columns">
+		  <div class="fixed contain-to-grid">
+			<!-- <nav> goes here -->
+			<nav class="top-bar">
+			  <ul>
+				<li class="name"><h1><a href="/">Home</a></h1></li>
+				<li class="toggle-topbar"><a href="#"></a></li>
+			  </ul>
+			  <section>
+				<ul class="left">
+				  <li><a href="/current">This Season</a></li>
+				  <li><a href="/season">Prior Seasons</a></li>
+				  <li><a href="/players">All-time Roster</a></li>
+				  <li><a href="/photos">Photo Gallery</a></li>
+				  <li><a href="/hall">Hall of Fame</a></li>
+				</ul>
+				<ul class="right">
+				  <li><a href="http://archive.mprsoftball.org" target="_blank">Ye Olde Website</a></li>
+				</ul>
+			  </section>
+			</nav>
+		  </div>
+		<div>  
+	</div>
+	
+  <!-- BREAK ROW TO PREVENT NEXT ROW FROM GETTING HIDDEN BY TOP NAVBAR 	
+  <div class="row">
+    <div class="twelve columns">
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    </div>  
+  </div>
+-->	  
+  <div class="twelve columns">
+    <div class="row">
+      <div class="nine columns">
+        <img alt="banner" src="/static/images/mprsoftball_banner.gif">
+      </div>
+      <div class="three columns">
+        <div class="panel">
+        {% block upper_right_panel %}{% endblock %}
+        </div>
+      </div>  
+    </div>
+  </div>
+  <div class="row">
+    <div class="twelve columns">
+     {% block content %}{% endblock %} 
+    </div>
+  </div> 
+
+
+  
+  <!-- Footer block -->
+  <div class="row">
+    <div class="twelve columns">
+      <div class="panel">
+      <p><i>The Minnesota Public Radio softball team is not an official unit of Minnesota Public Radio or American Public Media. Do not blame either entity for anything you find on this site. Like the game of softball itself, this site is designed for the pleasure and entertainment of its participants. If you have any comments or concerns, you can contact us at sitemanager(at)gmail.com.</i></p>
+      </div>
+    </div>
+  </div>
+  
+  
+  <!-- Included JS Files (Uncompressed) -->
+  <!--
+  <script src="javascripts/jquery.js"></script><script src="javascripts/jquery.foundation.mediaQueryToggle.js"></script><script src="javascripts/jquery.foundation.forms.js"></script><script src="javascripts/jquery.foundation.reveal.js"></script><script src="javascripts/jquery.foundation.orbit.js"></script><script src="javascripts/jquery.foundation.navigation.js"></script><script src="javascripts/jquery.foundation.buttons.js"></script><script src="javascripts/jquery.foundation.tabs.js"></script><script src="javascripts/jquery.foundation.tooltips.js"></script><script src="javascripts/jquery.foundation.accordion.js"></script><script src="javascripts/jquery.placeholder.js"></script><script src="javascripts/jquery.foundation.alerts.js"></script><script src="javascripts/jquery.foundation.topbar.js"></script><script src="javascripts/jquery.foundation.joyride.js"></script><script src="javascripts/jquery.foundation.clearing.js"></script><script src="javascripts/jquery.foundation.magellan.js"></script>
+  -->
+  
+  <!-- Included JS Files (Compressed) -->
+  <script src="/static/javascripts/jquery.js"></script>
+  <script src="/static/javascripts/foundation.min.js"></script>
+  
+  <!-- Initialize JS Plugins -->
+  <script src="/static/javascripts/app.js"></script>
+
+  
+    
+<script type='text/javascript'>
+   $(window).load(function() {
+       $('#featuredContent').orbit({
+         animation: 'horizontal-slide',
+         advanceSpeed: 8000,
+         pauseOnHover: true, 
+         startClockOnMouseOut: true,        // if clock should start on MouseOut
+         startClockOnMouseOutAfter: 800,
+         directionalNav: true,  
+         fluid: '1x2',
+   });
+   });
+</script>
+  
+</body>
+</html>

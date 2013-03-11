@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}MPR Softball - Home{% endblock %}
+
+{% block upper_right_panel %}
+    <strong>Battle Creek weather</strong><br>
+    Temp: {{ current_temp }}F<br>
+    Skies: {{ sky }}<br>
+    <br>
+    <strong>{{ period1 }}:</strong> {{ fcst1 }}<br>
+    <strong>{{ period2 }}:</strong> {{ fcst2 }}
+{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="nine columns">
+	{% if content_list %}
+		{% for item in content_list %}
+		  {% if item.published %}
+			<h3>{{ item.title  }}</h3>
+			{{  item.content|safe  }}
+		  {% endif %}
+		{% endfor %}
+	{% else %}
+		<p>Problem with content list.</p>
+	{% endif %}
+  </div>
+  <div class="three columns">
+  <h5>Upcoming games:</h5>
+	{% if latest_games_list %}
+		
+        <div id="featuredContent">
+		{% for game in latest_games_list %}
+			<div>
+			<h5>{{ game.DateTime }}</h5>
+			<h6>At {{game.location}} vs. {{game.opponent}}</h6>
+			<h6>Roster:</h6>
+			{% for player in game.players.all %}
+				{{player}}<br>
+			{% endfor %}
+			</div>
+		{% endfor %}
+		</div>
+	{% else %}
+		<p>No games are scheduled.</p>
+	{% endif %}
+	<a class="large button" href="https://www.facebook.com/pages/MPR-Softball/103512325990?ref=ts&fref=ts" target="_blank"><strong>Follow on </strong><img alt="Facebook" src="/static/images/facebook.png"></a>
+
+  </div>
+</div>
+
+{% endblock %}
+
+{% block games %}
+
+
+{% endblock %}

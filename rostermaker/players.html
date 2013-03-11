@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}MPR Softball - All-time Roster{% endblock %}
+
+{% block upper_right_panel %}
+
+    <h6>Did you know...</h6>
+    that since 1981
+    <h5>{{ count }}</h5>
+    people have played on the team? 
+
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+      <div class="twelve columns">
+        <h2>Players</h2>
+      </div>
+    </div> 
+    <div class="row">
+    <div class="one columns"></div>
+      <div class="two columns">
+        <ul>
+          {% for player in players_list %}
+            {% if forloop.counter|divisibleby:column_counts %}
+            <li>{{ player.lastName }}, {{ player.firstName }}</li>
+            </div>
+            <div class="two columns">
+            <ul>
+            {% else %}
+            <li>{{ player.lastName }}, {{ player.firstName }}</li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </div>  
+    </div>
+    
+{% endblock %}
+

@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block title %}MPR Softball - Prior Seasons{% endblock %}
+
+{% block upper_right_panel %}
+
+    
+    <h1>Season:</h1>
+    <h2>{{ season.year }}</h2>
+    <h3>Record:</h3>
+    <h4>{{ season.wins }} - {{ season.losses }}</h4>
+
+{% endblock %}
+
+{% block content %}
+  <div class="row">
+      <div class="one columns"></div>
+      <div class="five columns">
+      <h2>Recap</h2>
+      {{ season.recap|safe }}
+      {% if season.captains.count != 0 %}
+        <h4>Captains: <br>
+        {% for captain in season.captains.all %}
+        {{ captain.firstName }} {{ captain.lastName }}<br>
+        {% endfor %}
+        </h4>
+      {% endif %}
+      {% if season.rookies.count != 0 %}
+        <h4>Rookie(s) of the Year: <br>
+        {% for rookie in season.rookies.all %}
+        {{ rookie.firstName }} {{ rookie.lastName }}<br>
+        {% endfor %}
+        </h4>
+      {% endif %}  
+      {% if season.mostimproved.count != 0 %}
+        <h4>Most Improved: <br>
+        {% for mostimproved in season.mostimproved.all %}
+        {{ mostimproved.firstName }} {{ mostimproved.lastName }}<br>
+        {% endfor %}
+        </h4>
+      {% endif %}
+      {% if season.battingchamps.count != 0 %}
+        <h4>Batting Champ(s): <br>
+        {% for battingchamp in season.battingchamps.all %}
+        {{ battingchamp.firstName }} {{ battingchamp.lastName }}<br>
+        {% endfor %}
+        </h4>
+      {% endif %}
+      {% if season.goldengloves.count != 0 %}
+        <h4>Golden Glove(s): <br>
+        {% for glove in season.goldengloves.all %}
+        {{ glove.firstName }} {{ glove.lastName }}<br>
+        {% endfor %}
+        </h4>
+      {% endif %}
+      {% if season.mvp.count != 0 %}
+        <h4>Most Valuable Player(s): <br>
+        {% for mvp in season.mvp.all %}
+        {{ mvp.firstName }} {{ mvp.lastName }}<br>
+        {% endfor %}
+        </h4>
+      {% endif %}
+      {% if season.bombat.count != 0 %}
+        <h4>Bombat: <br>
+        {% for bombat in season.bombat.all %}
+        {{ bombat.firstName }} {{ bombat.lastName }}<br>
+        {% endfor %}
+        </h4>
+      {% endif %}
+      {% if season.whippet.count != 0 %}
+        <h4>Whippet(s) of the Year: <br>
+        {% for whippet in season.whippet.all %}
+        {{ whippet.firstName }} {{ whippet.lastName }}<br>
+        {% endfor %}
+        </h4>
+      {% endif %}
+      </div>
+      <div class="one columns"></div>
+      <div class="five columns">
+      <h2>Roster:</h2>
+      {% for player in season.roster.all %}
+		{{ player.lastName }}, {{ player.firstName }}</br>
+	  {% endfor %}
+      </div>
+  </div>
+
+    
+    
+{% endblock %}
+
