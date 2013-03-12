@@ -79,7 +79,10 @@
       <div class="five columns">
       <h2>Roster:</h2>
       {% for player in season.roster.all %}
-		{{ player.lastName }}, {{ player.firstName }}</br>
+		{{ player.lastName }}, {{ player.firstName }}
+		{% if player.alias %}
+          (<i>aka</i> {{ player.alias }})
+        {% endif %}</br>
 	  {% endfor %}
       </div>
   </div>

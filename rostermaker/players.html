@@ -23,12 +23,20 @@
         <ul>
           {% for player in players_list %}
             {% if forloop.counter|divisibleby:column_counts %}
-            <li>{{ player.lastName }}, {{ player.firstName }}</li>
+            <li>{{ player.lastName }}, {{ player.firstName }}
+              {% if player.alias %}
+                (<i>aka</i> {{ player.alias }})
+              {% endif %}
+            </li>  
             </div>
             <div class="two columns">
             <ul>
             {% else %}
-            <li>{{ player.lastName }}, {{ player.firstName }}</li>
+            <li>{{ player.lastName }}, {{ player.firstName }}
+              {% if player.alias %}
+                (<i>aka</i> {{ player.alias }})
+              {% endif %}
+            </li> 
             {% endif %}
           {% endfor %}
         </ul>

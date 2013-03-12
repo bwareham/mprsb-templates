@@ -26,6 +26,13 @@
 	{% endif %}
   </div>
   <div class="three columns">
+  {% if played_games_list %}
+    <h5>Latest score</h5>
+    {% with played_games_list|first as latest_game %}MPR {{ latest_game.scoreMPR }} {{ latest_game.opponent }} {{ latest_game.scoreOPP }}{% endwith %}  
+
+  {% else %}
+    Not working
+  {% endif %}
   <h5>Upcoming games:</h5>
 	{% if latest_games_list %}
 		

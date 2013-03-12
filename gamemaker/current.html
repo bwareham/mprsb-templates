@@ -19,7 +19,18 @@
 		{% else %}
 			<p>Problem with content list.</p>
 		{% endif %}
-  </div>
+	  </div>
+    </div>
+    <div>
+      <div class="row">
+        <div class="twelve columns">
+        {% if played_games_list %}
+          MPR {% with played_games_list|first as latest_game %}{{ latest_game.scoreMPR }} {{ latest_game.opponent }} {{ latest_game.scoreOPP }}{% endwith %}  
+        {% else %}
+          Not working
+        {% endif %}
+      </div>
+    </div>
     
     
 {% endblock %}
