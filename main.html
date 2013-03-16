@@ -28,18 +28,23 @@
   <div class="three columns">
   {% if played_games_list %}
     <h5>Latest score</h5>
-    {% with played_games_list|first as latest_game %}MPR {{ latest_game.scoreMPR }} {{ latest_game.opponent }} {{ latest_game.scoreOPP }}{% endwith %}  
-
+    {% with played_games_list|first as latest_game %}
+      {% if latest_game.scoreMPR > latest_game.scoreOPP %}
+        <strong>MPR {{ latest_game.scoreMPR }}</strong> {{ latest_game.opponent }} {{ latest_game.scoreOPP }}
+      {% else %}
+        MPR {{ latest_game.scoreMPR }} <strong>{{ latest_game.opponent }} {{ latest_game.scoreOPP }}</strong>    
+      {% endif %}
+    {% endwith %}  
   {% else %}
     Not working
   {% endif %}
+  <hr>
   <h5>Upcoming games:</h5>
 	{% if latest_games_list %}
-		
         <div id="featuredContent">
 		{% for game in latest_games_list %}
 			<div>
-			<h5>{{ game.DateTime }}</h5>
+			<h5>{{ game.DateTime|date:"N j" }}</h5>
 			<h6>At {{game.location}} vs. {{game.opponent}}</h6>
 			<h6>Roster:</h6>
 			{% for player in game.players.all %}

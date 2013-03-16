@@ -9,8 +9,8 @@
 {% endblock %}
 
 {% block content %}
-    <div class="row">
-      <div class="twelve columns">
+	<div class="row">
+	  <div class="twelve columns">
 		{% if content_list %}
 			{% for item in content_list %}
 				<h3>{{ item.title  }}</h3>
@@ -20,16 +20,51 @@
 			<p>Problem with content list.</p>
 		{% endif %}
 	  </div>
-    </div>
-    <div>
-      <div class="row">
-        <div class="twelve columns">
-        {% if played_games_list %}
-          MPR {% with played_games_list|first as latest_game %}{{ latest_game.scoreMPR }} {{ latest_game.opponent }} {{ latest_game.scoreOPP }}{% endwith %}  
-        {% else %}
-          Not working
-        {% endif %}
-      </div>
+	</div>
+
+	<div class="row">
+	    <div class="four columns">
+	    <h4>Scores</h4>
+	    <hr>
+			{% if played_games_list %}
+			  {% for game in played_games_list %}
+				<ul>
+				{% if game.scoreMPR > game.scoreOPP %}
+				  <li>{{ game.DateTime|date:"N j" }}: <strong>MPR {{ game.scoreMPR }}</strong> {{ game.opponent }} {{ game.scoreOPP }}
+				{% else %}
+				  <li>{{ game.DateTime|date:"N j" }}: MPR {{ game.scoreMPR }} <strong>{{ game.opponent }} {{ game.scoreOPP }}</strong>    
+				{% endif %}
+				</ul>
+			  {% endfor %}
+			{% else %}
+			  No games
+			{% endif %}
+		</div>
+		<div class="four columns">
+		<h4>Leaders</h4>
+		<hr>
+		</div>
+		<div class="four columns">
+		  <h4>Upcoming games</h4>
+		  <hr>
+			{% if latest_games_list %}
+				<div id="featuredContent">
+				{% for game in latest_games_list %}
+					<div>
+					<h5>{{ game.DateTime|date:"N j" }}</h5>
+					<h6>At {{game.location}} vs. {{game.opponent}}</h6>
+					<h6>Roster:</h6>
+					{% for player in game.players.all %}
+						{{player}}<br>
+					{% endfor %}
+					</div>
+				{% endfor %}
+				</div>
+			{% else %}
+				<p>No games are scheduled.</p>
+			{% endif %}
+
+		</div>
     </div>
     
     
