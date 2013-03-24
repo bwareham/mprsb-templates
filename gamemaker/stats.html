@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}MPR Softball - All-time Roster{% endblock %}
+
+{% block upper_right_panel %}
+
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+{% endblock %}
+
+{% block content %}
+<table>
+  <tr>
+  <td><strong>Player</strong>
+  </td><td><strong>Avg</strong></td>
+  <td><strong>AB</strong></td>
+  <td><strong>1B</strong></td>
+  <td><strong>2B</strong></td>
+  <td><strong>3B</strong></td>
+  <td><strong>HR</strong></td>
+  <td><strong>SAC</strong></td>
+  <td><strong>BB</strong></td>
+  <td><strong>SO</strong></td>
+  <td><strong>R</strong></td>
+  <td><strong>RBI</strong></td>
+  </tr>
+{% for item in totals|dictsort:"name.lastName" %}
+
+    <tr>
+    <td>{{ item.name }}</td>
+    <td>{{ item.avg|floatformat:3 }}</td>
+    <td>{{ item.ab }}</td><td>{{ item.sing }}</td>
+    <td>{{ item.doub }}</td><td>{{ item.trip }}</td>
+    <td>{{ item.hr }}</td>
+    <td>{{ item.sac }}</td>
+    <td>{{ item.bb }}</td>
+    <td>{{ item.so }}</td>
+    <td>{{ item.runs }}</td>
+    <td>{{ item.rbi }}</td>
+    </tr>
+
+{% endfor %} 
+</table>
+{% endblock %}
