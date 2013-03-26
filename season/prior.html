@@ -23,13 +23,13 @@
   </div>
   <div class="row">
     <div class="one columns"></div>
-      <div class="three columns">
+      <div class="two columns">
         <ul>
           {% for season in seasons %}
             {% if forloop.counter|divisibleby:column_counts %}
             <li><a href="http://www.mprsoftball.org/season_detail/{{ season.year }}/">{{ season.year }}</a></li>
             </div>
-            <div class="three columns">
+            <div class="two columns">
             <ul>
             {% else %}
             <li><a href="http://www.mprsoftball.org/season_detail/{{ season.year }}/">{{ season.year }}</a></li>

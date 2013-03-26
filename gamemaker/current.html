@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}MPR Softball - All-time Roster{% endblock %}
+{% block title %}MPR Softball - Current Season{% endblock %}
 
 {% block upper_right_panel %}
 
@@ -43,6 +43,42 @@
 		<div class="four columns">
 		<h4>Leaders</h4>
 		<hr>
+		<h6>Batting average</h4>
+		{% with totals|dictsortreversed:"avg" as leaders_avg%}
+		  <table>
+			{% for item in leaders_avg %}
+				{% if item.avg >= leaders_avg.2.avg %}
+				  <tr>
+					<td>{{ item.name }}</td><td>{{ item.avg|floatformat:3 }}</td>
+				  </tr>
+				{% endif %}
+			{% endfor %}
+		  </table>
+		{% endwith %}
+		<h6>Runs batted in</h4>
+		{% with totals|dictsortreversed:"rbi" as leaders_rbi%}
+		  <table>
+			{% for item in leaders_rbi %}
+				{% if item.rbi >= leaders_rbi.2.rbi %}
+				  <tr>
+					<td>{{ item.name }}</td><td>{{ item.rbi }}</td>
+				  </tr>
+				{% endif %}
+			{% endfor %}
+		  </table>
+		{% endwith %}
+		<h6>Home runs</h4>
+		{% with totals|dictsortreversed:"hr" as leaders_hr%}
+		  <table>
+			{% for item in leaders_hr %}
+				{% if item.hr >= leaders_hr.2.hr %}
+				  <tr>
+					<td>{{ item.name }}</td><td>{{ item.hr }}</td>
+				  </tr>
+				{% endif %}
+			{% endfor %}
+		  </table>
+		{% endwith %}
 		</div>
 		<div class="four columns">
 		  <h4>Upcoming games</h4>
