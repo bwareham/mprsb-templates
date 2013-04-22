@@ -8,15 +8,25 @@
     <h1>Season:</h1>
     <h2>{{ season.year }}</h2>
     <h3>Record:</h3>
-    <h4>{{ season.wins }} - {{ season.losses }}</h4>
+    <h4>{{ season.wins }} - {{ season.losses }}{% if season.ties %} - {{season.ties }}{% endif %}</h4>
 
 {% endblock %}
 
 {% block content %}
   <div class="row">
+      <div class="twelve columns">
+          <ul class="button-group even three-up">
+			  <li><a href="http://www.mprsoftball.org/season_detail/{{ season.year|add:"-1" }}/" class="button">&larr; {{ season.year|add:"-1" }}</a></li>
+			  <li><a href="http://www.mprsoftball.org/season/" class="button">All prior seasons</a></li>
+			  <li><a href="http://www.mprsoftball.org/season_detail/{{ season.year|add:"1" }}/" class="button">{{ season.year|add:"1" }} &rarr;</a></li>
+		  </ul>
+
+      </div>
+  </div>
+  <div class="row">
       <div class="one columns"></div>
       <div class="five columns">
-      <h2>Year in Review</h2>
+      <h2>{{ season.year }} in Review</h2>
       <hr>
       {{ season.recap|safe }}
       {% if season.captains.count != 0 %}

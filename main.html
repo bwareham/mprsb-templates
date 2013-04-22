@@ -2,13 +2,18 @@
 
 {% block title %}MPR Softball - Home{% endblock %}
 
+{% block init %}<body onLoad="initialize()">{% endblock %}
+
+{% block script %}<script src="/static/javascripts/dir.js"></script>{% endblock %}
+
 {% block upper_right_panel %}
-    <strong>Battle Creek weather</strong><br>
+    <strong>Rice Rec Center weather</strong><br>
     Temp: {{ current_temp }}F<br>
     Skies: {{ sky }}<br>
     <br>
-    <strong>{{ period1 }}:</strong> {{ fcst1 }}<br>
-    <strong>{{ period2 }}:</strong> {{ fcst2 }}
+    <strong>{{ period1 }}:</strong> {{ fcst1 }}<br><br>
+	<a href="#" class="button" data-reveal-id="wxModal" width=100% >More weather</a>
+
 {% endblock %}
 
 {% block content %}
@@ -56,10 +61,27 @@
 	{% else %}
 		<p>No games are scheduled.</p>
 	{% endif %}
-	<a class="large button" href="https://www.facebook.com/pages/MPR-Softball/103512325990?ref=ts&fref=ts" target="_blank"><strong>Follow on </strong><img alt="Facebook" src="/static/images/facebook.png"></a>
+	
+	<a class="large button" href="/directions.html">Directions to field</a>
+	
+	<a class="large button" href="https://www.facebook.com/pages/MPR-Softball/103512325990?ref=ts&fref=ts" target="_blank"><strong>Follow on </strong><br><img alt="Facebook" src="/static/images/facebook.png"></a>
 
   </div>
 </div>
+
+<!-- Weather modal -->
+
+<div id="wxModal" class="reveal-modal [expand, xlarge, large, medium, small]">
+  <strong>Rice Rec Center weather</strong><br>
+    Temp: {{ current_temp }}F<br>
+    Skies: {{ sky }}<br>
+    <br>
+    <strong>{{ period1 }}:</strong> {{ fcst1 }}<br>
+    <strong>{{ period2 }}:</strong> {{ fcst2 }}<br>
+    <strong>{{ period3 }}:</strong> {{ fcst3 }}<br>    
+    <a class="close-reveal-modal">×</a>
+</div>
+
 
 {% endblock %}
 
