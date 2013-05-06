@@ -44,7 +44,7 @@
 		<h4>Leaders</h4>
 		<hr>
 		<h6>Batting average</h4>
-		{% with totals|dictsortreversed:"avg" as leaders_avg%}
+		{% with totals|dictsortreversed:"avg" as leaders_avg %}
 		  <table>
 			{% for item in leaders_avg %}
 				{% if item.avg >= leaders_avg.2.avg %}

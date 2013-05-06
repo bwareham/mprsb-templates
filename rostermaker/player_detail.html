@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+
+{% load humanize %}
+{% block title %}MPR Softball - {{ player }}{% endblock %}
+
+{% block content %}
+
+<h4>{{ player.firstName }} {{ player.lastName }}</h4>
+{% if player.active %}
+    {{ player.firstName }} started playing on the team in {{ seasons|first }} and is still active.
+{% elif seasons|length_is:"1" %}
+    {{ player.firstName }} played in the {{ seasons|first }} season.
+{% else %}
+    {{ player.firstName }} played {{ seasons|length|apnumber }} seasons, from {{ seasons|first }} to {{ seasons|dictsortreversed:"year"|first }}.
+{% endif %}
+<br><br>
+{% if captain %}
+    <strong>Captain: </strong>
+    {% for year in captain %}
+    {% if forloop.last %}
+        {{ year.year }}
+        {% else %}
+        {{ year.year }}, 
+    {% endif %}
+    {% endfor %}
+<br>
+{% endif %}
+
+{% if battingchamp %}
+    <strong>Batting Champ: </strong>
+    {% for year in battingchamp %}
+    {% if forloop.last %}
+        {{ year.year }}
+        {% else %}
+        {{ year.year }}, 
+    {% endif %}
+    {% endfor %}
+<br>
+{% endif %}
+
+{% if goldenglove %}
+    <strong>Golden Glove: </strong>
+    {% for year in goldenglove %}
+    {% if forloop.last %}
+        {{ year.year }}
+        {% else %}
+        {{ year.year }}, 
+    {% endif %}
+    {% endfor %}
+<br>
+{% endif %}
+
+{% if mvp %}
+    <strong>Most Valuable Player: </strong>
+    {% for year in mvp %}
+    {% if forloop.last %}
+        {{ year.year }}
+        {% else %}
+        {{ year.year }}, 
+    {% endif %}
+    {% endfor %}
+<br>
+{% endif %}
+
+{% if mostimproved %}
+    <strong>Most Improved: </strong>
+    {% for year in mostimproved %}
+    {% if forloop.last %}
+        {{ year.year }}
+        {% else %}
+        {{ year.year }}, 
+    {% endif %}
+    {% endfor %}
+<br>
+{% endif %}
+
+{% if rookie %}
+    <strong>Rookie of the Year: </strong>
+    {% for year in rookie %}
+    {% if forloop.last %}
+        {{ year.year }}
+        {% else %}
+        {{ year.year }}, 
+    {% endif %}
+    {% endfor %}
+<br>
+{% endif %}
+
+{% if whippet %}
+    <strong>Whippet of the Year: </strong>
+    {% for year in whippet %}
+    {% if forloop.last %}
+        {{ year.year }}
+        {% else %}
+        {{ year.year }}, 
+    {% endif %}
+    {% endfor %}
+<br>
+{% endif %}
+
+{% if bombat %}
+    <strong>Bombat: </strong>
+    {% for year in bombat %}
+    {% if forloop.last %}
+        {{ year.year }}
+        {% else %}
+        {{ year.year }}, 
+    {% endif %}
+    {% endfor %}
+<br>
+{% endif %}
+<br>
+
+{% if hof %}
+    <h5>Hall of Fame</h5>
+    <ul>
+    {% for entry in hof %}
+    <li>Inducted into the <strong>
+    {% if entry.wing == "MN" %}Main Hall
+    {% elif entry.wing == "SP" %}Satchel Paige Wing
+    {% elif entry.wing == "WP" %}Wally Pipp Ward
+    {% elif entry.wing == "TW" %}Ted Williams Suite 
+    {% endif %}
+    </strong>
+    in {{ entry.yearEntered }}<br>
+    {{ entry.inscription|safe }}
+    </li>  
+    {% endfor %}
+    </ul>
+{% endif %}
+{% endblock %}

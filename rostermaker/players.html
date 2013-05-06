@@ -23,7 +23,7 @@
         <ul>
           {% for player in players_list %}
             {% if forloop.counter|divisibleby:column_counts %}
-            <li>{{ player.lastName }}, {{ player.firstName }}
+            <li><a href="http://www.mprsoftball.org/player_detail/{{ player.pk }}/">{{ player.lastName }}, {{ player.firstName }}</a>
               {% if player.alias %}
                 (<i>aka</i> {{ player.alias }})
               {% endif %}
@@ -32,7 +32,7 @@
             <div class="two columns">
             <ul>
             {% else %}
-            <li>{{ player.lastName }}, {{ player.firstName }}
+            <li><a href="http://www.mprsoftball.org/player_detail/{{ player.pk }}/">{{ player.lastName }}, {{ player.firstName }}</a>
               {% if player.alias %}
                 (<i>aka</i> {{ player.alias }})
               {% endif %}

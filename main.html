@@ -10,6 +10,7 @@
     <strong>Rice Rec Center weather</strong><br>
     Temp: {{ current_temp }}F<br>
     Skies: {{ sky }}<br>
+    Wind: {{ dir }} {{ wind_mph }} mph<br>
     <br>
     <strong>{{ period1 }}:</strong> {{ fcst1 }}<br><br>
 	<a href="#" class="button" data-reveal-id="wxModal" width=100% >More weather</a>
@@ -39,9 +40,7 @@
       {% else %}
         MPR {{ latest_game.scoreMPR }} <strong>{{ latest_game.opponent }} {{ latest_game.scoreOPP }}</strong>    
       {% endif %}
-    {% endwith %}  
-  {% else %}
-    Not working
+    {% endwith %}    
   {% endif %}
   <hr>
   <h5>Upcoming games:</h5>
@@ -75,6 +74,7 @@
   <strong>Rice Rec Center weather</strong><br>
     Temp: {{ current_temp }}F<br>
     Skies: {{ sky }}<br>
+    Wind: {{ dir }} {{ wind_mph }} mph<br>
     <br>
     <strong>{{ period1 }}:</strong> {{ fcst1 }}<br>
     <strong>{{ period2 }}:</strong> {{ fcst2 }}<br>
