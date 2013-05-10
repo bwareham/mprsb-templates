@@ -2,11 +2,10 @@
 
 {% block title %}MPR Softball - Current Season{% endblock %}
 
-{% block upper_right_panel %}
-
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+{% block script %}
 
 {% endblock %}
+
 
 {% block content %}
 	<div class="row">
@@ -47,7 +46,7 @@
 		{% with totals|dictsortreversed:"avg" as leaders_avg %}
 		  <table>
 			{% for item in leaders_avg %}
-				{% if item.avg >= leaders_avg.2.avg %}
+				{% if item.avg >= leaders_avg.2.avg and item.avg != 0 %}
 				  <tr>
 					<td>{{ item.name }}</td><td>{{ item.avg|floatformat:3 }}</td>
 				  </tr>
@@ -59,7 +58,7 @@
 		{% with totals|dictsortreversed:"rbi" as leaders_rbi%}
 		  <table>
 			{% for item in leaders_rbi %}
-				{% if item.rbi >= leaders_rbi.2.rbi %}
+				{% if item.rbi >= leaders_rbi.2.rbi and item.rbi != 0 %}
 				  <tr>
 					<td>{{ item.name }}</td><td>{{ item.rbi }}</td>
 				  </tr>
@@ -71,7 +70,7 @@
 		{% with totals|dictsortreversed:"hr" as leaders_hr%}
 		  <table>
 			{% for item in leaders_hr %}
-				{% if item.hr >= leaders_hr.2.hr %}
+				{% if item.hr >= leaders_hr.2.hr and item.hr != 0 %}
 				  <tr>
 					<td>{{ item.name }}</td><td>{{ item.hr }}</td>
 				  </tr>
@@ -83,19 +82,44 @@
 		<div class="four columns">
 		  <h4>Upcoming games</h4>
 		  <hr>
+
 			{% if latest_games_list %}
-				<div id="featuredContent">
+				<ul class="accordion">
 				{% for game in latest_games_list %}
-					<div>
-					<h5>{{ game.DateTime|date:"N j" }}</h5>
-					<h6>At {{game.location}} vs. {{game.opponent}}</h6>
-					<h6>Roster:</h6>
-					{% for player in game.players.all %}
-						{{player}}<br>
-					{% endfor %}
-					</div>
+				  
+					{% if forloop.first %}
+					<li class="active">
+					  <div class="title">
+					    <h5>{{ game.DateTime|date:"N j, P" }}</h5>
+					    <strong>At {{game.location}} vs. {{game.opponent}}</strong><br>
+					  </div>
+					  <div class="content">
+					    <strong>Roster:</strong><br>
+					    {% for player in game.players.all %}
+						    {{player}}<br>
+					    {% endfor %}
+					  </div>
+					</li>
+					{% else %}
+					<li>
+					  <div class="title">
+					    <h5>{{ game.DateTime|date:"N j, P" }}</h5>
+					    <strong>At {{game.location}} vs. {{game.opponent}}</strong><br>
+					  </div>
+					  <div class="content">
+					    <strong>Roster:</strong><br>
+					    {% for player in game.players.all %}
+						    {{player}}<br>
+					    {% endfor %}
+					  </div>
+					</li>
+					</li>
+					
+					{% endif %}
+				  
 				{% endfor %}
-				</div>
+				</ul>
+		  
 			{% else %}
 				<p>No games are scheduled.</p>
 			{% endif %}

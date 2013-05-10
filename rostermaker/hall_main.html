@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}MPR Softball - Hall of Fame{% endblock %}
+
+
+{% block content %}
+    <div class="row">
+      <div class="twelve columns">
+		{% if content_list %}
+			{% for item in content_list %}
+				<h3>{{ item.title  }}</h3>
+				{{  item.content|safe  }}
+			{% endfor %}
+		{% else %}
+			<p>Problem with content list.</p>
+		{% endif %}
+      </div>
+    </div>
+    <div class="row">
+		<div class="three columns">
+			<h4>Main Hall</h4>
+			<hr>
+			<ul>
+			{% for famer in main %}
+			  <li><a href="http://www.mprsoftball.org/player_detail/{{ famer.player.pk }}/">{{ famer.player }}</a> [{{ famer.yearEntered }}]
+			{% endfor %}
+			</ul>	
+		</div>
+		<div class="three columns">
+			<h4>Satchel Paige Wing</h4>
+			<hr>
+			<ul>
+			{% for famer in paige %}
+			  <li><a href="http://www.mprsoftball.org/player_detail/{{ famer.player.pk }}/">{{ famer.player }}</a> [{{ famer.yearEntered }}]
+			{% endfor %}
+			</ul>	
+		</div>
+
+		<div class="three columns">
+			<h4>Wally Pipp Ward</h4>
+			<hr>
+			<ul>
+			{% for famer in pipp %}
+			  <li><a href="http://www.mprsoftball.org/player_detail/{{ famer.player.pk }}/">{{ famer.player }}</a> [{{ famer.yearEntered }}]
+			{% endfor %}
+			</ul>	
+		</div>
+		<div class="three columns">
+			<h4>Ted Williams Suite</h4>
+			<hr>
+			<ul>
+			{% for famer in ted %}
+			  <li><a href="http://www.mprsoftball.org/player_detail/{{ famer.player.pk }}/">{{ famer.player }}</a> [{{ famer.yearEntered }}]
+			{% endfor %}
+			</ul>	
+		</div>
+
+	</div>
+{% endblock %}
+

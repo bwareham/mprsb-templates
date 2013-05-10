@@ -6,10 +6,17 @@
 {% block content %}
 
 <h4>{{ player.firstName }} {{ player.lastName }}</h4>
-{% if player.active %}
+{% if player.alias %}
+    (<i>aka</i> {{ player.alias }})<br><br>
+{% endif %}
+{% if player.active and seasons|length_is:"0" %}
+    {{ player.firstName }} is a rookie.
+{% elif player.active %}
     {{ player.firstName }} started playing on the team in {{ seasons|first }} and is still active.
 {% elif seasons|length_is:"1" %}
     {{ player.firstName }} played in the {{ seasons|first }} season.
+{% elif seasons|length_is:"0" %}
+    {{ player.firstName }} did not play, but earned special recognition:
 {% else %}
     {{ player.firstName }} played {{ seasons|length|apnumber }} seasons, from {{ seasons|first }} to {{ seasons|dictsortreversed:"year"|first }}.
 {% endif %}

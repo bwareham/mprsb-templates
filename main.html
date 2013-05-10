@@ -45,22 +45,44 @@
   <hr>
   <h5>Upcoming games:</h5>
 	{% if latest_games_list %}
-        <div id="featuredContent">
+		<ul class="accordion">
 		{% for game in latest_games_list %}
-			<div>
-			<h5>{{ game.DateTime|date:"N j" }}</h5>
-			<h6>At {{game.location}} vs. {{game.opponent}}</h6>
-			<h6>Roster:</h6>
-			{% for player in game.players.all %}
-				{{player}}<br>
-			{% endfor %}
-			</div>
+		  
+			{% if forloop.first %}
+			<li class="active">
+			  <div class="title">
+			    <h5>{{ game.DateTime|date:"N j, P" }}</h5>
+			    <strong>At {{game.location}} vs. {{game.opponent}}</strong><br>
+			  </div>
+			  <div class="content">
+			    <strong>Roster:</strong><br>
+			    {% for player in game.players.all %}
+				    {{player}}<br>
+			    {% endfor %}
+			  </div>
+			</li>
+			{% else %}
+			<li>
+			  <div class="title">
+			    <h5>{{ game.DateTime|date:"N j, P" }}</h5>
+			    <strong>At {{game.location}} vs. {{game.opponent}}</strong><br>
+			  </div>
+			  <div class="content">
+			    <strong>Roster:</strong><br>
+			    {% for player in game.players.all %}
+				    {{player}}<br>
+			    {% endfor %}
+			  </div>
+			</li>
+			</li>
+		{% endif %}
 		{% endfor %}
-		</div>
-	{% else %}
-		<p>No games are scheduled.</p>
-	{% endif %}
-	
+		</ul>
+
+		{% else %}
+			<p>No games are scheduled.</p>
+		{% endif %}
+
 	<a class="large button" href="/directions.html">Directions to field</a>
 	
 	<a class="large button" href="https://www.facebook.com/pages/MPR-Softball/103512325990?ref=ts&fref=ts" target="_blank"><strong>Follow on </strong><br><img alt="Facebook" src="/static/images/facebook.png"></a>

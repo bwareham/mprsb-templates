@@ -17,18 +17,18 @@
       <div class="twelve columns">
 	    {% if season.year = 1981 %}
 		  <ul class="button-group even two-up">
-			  <li><a href="http://www.mprsoftball.org/season/" class="button">All prior seasons</a></li>
+			  <li><a href="http://www.mprsoftball.org/season/" class="button">All seasons</a></li>
 			  <li><a href="http://www.mprsoftball.org/season_detail/{{ season.year|add:"1" }}/" class="button">{{ season.year|add:"1" }} &rarr;</a></li>
 		  </ul>
 		{% elif season.year|add:"1" = current_year %}
 		  <ul class="button-group even two-up">
 			  <li><a href="http://www.mprsoftball.org/season_detail/{{ season.year|add:"-1" }}/" class="button">&larr; {{ season.year|add:"-1" }}</a></li>
-			  <li><a href="http://www.mprsoftball.org/season/" class="button">All prior seasons</a></li>
+			  <li><a href="http://www.mprsoftball.org/season/" class="button">All seasons</a></li>
 		  </ul>
 		{% else %}
           <ul class="button-group even three-up">
 			  <li><a href="http://www.mprsoftball.org/season_detail/{{ season.year|add:"-1" }}/" class="button">&larr; {{ season.year|add:"-1" }}</a></li>
-			  <li><a href="http://www.mprsoftball.org/season/" class="button">All prior seasons</a></li>
+			  <li><a href="http://www.mprsoftball.org/season/" class="button">All seasons</a></li>
 			  <li><a href="http://www.mprsoftball.org/season_detail/{{ season.year|add:"1" }}/" class="button">{{ season.year|add:"1" }} &rarr;</a></li>
 		  </ul>
         {% endif %}
