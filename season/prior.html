@@ -2,6 +2,10 @@
 
 {% block title %}MPR Softball - Prior Seasons{% endblock %}
 
+{% block upper_right_panel %}
+<h4>Franchise record:</h4>
+<h4>{{ pastWins.wins__sum|add:wins }} - {{ pastLosses.losses__sum|add:losses }} - {{ pastTies.ties__sum|add:ties }}</h4>
+{% endblock %}
 
 {% block content %}
   <div class="row">
