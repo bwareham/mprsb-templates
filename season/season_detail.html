@@ -6,30 +6,30 @@
 
     
     <h1>Season:</h1>
-    <h2>{{ season.year }}</h2>
+    <h2>{{ season_prior.year }}</h2>
     <h3>Record:</h3>
-    <h4>{{ season.wins }} - {{ season.losses }}{% if season.ties %} - {{season.ties }}{% endif %}</h4>
+    <h4>{{ season_prior.wins }} - {{ season_prior.losses }}{% if season_prior.ties %} - {{season_prior.ties }}{% endif %}</h4>
 
 {% endblock %}
 
 {% block content %}
   <div class="row">
       <div class="twelve columns">
-	    {% if season.year = 1981 %}
+	    {% if season_prior.year = 1981 %}
 		  <ul class="button-group even two-up">
 			  <li><a href="http://www.mprsoftball.org/season/" class="button">All seasons</a></li>
-			  <li><a href="http://www.mprsoftball.org/season_detail/{{ season.year|add:"1" }}/" class="button">{{ season.year|add:"1" }} &rarr;</a></li>
+			  <li><a href="http://www.mprsoftball.org/season_detail/{{ season_prior.year|add:"1" }}/" class="button">{{ season_prior.year|add:"1" }} &rarr;</a></li>
 		  </ul>
-		{% elif season.year|add:"1" = current_year %}
+		{% elif season_prior.year|add:"1" = current_year %}
 		  <ul class="button-group even two-up">
-			  <li><a href="http://www.mprsoftball.org/season_detail/{{ season.year|add:"-1" }}/" class="button">&larr; {{ season.year|add:"-1" }}</a></li>
+			  <li><a href="http://www.mprsoftball.org/season_detail/{{ season_prior.year|add:"-1" }}/" class="button">&larr; {{ season_prior.year|add:"-1" }}</a></li>
 			  <li><a href="http://www.mprsoftball.org/season/" class="button">All seasons</a></li>
 		  </ul>
 		{% else %}
           <ul class="button-group even three-up">
-			  <li><a href="http://www.mprsoftball.org/season_detail/{{ season.year|add:"-1" }}/" class="button">&larr; {{ season.year|add:"-1" }}</a></li>
+			  <li><a href="http://www.mprsoftball.org/season_detail/{{ season_prior.year|add:"-1" }}/" class="button">&larr; {{ season_prior.year|add:"-1" }}</a></li>
 			  <li><a href="http://www.mprsoftball.org/season/" class="button">All seasons</a></li>
-			  <li><a href="http://www.mprsoftball.org/season_detail/{{ season.year|add:"1" }}/" class="button">{{ season.year|add:"1" }} &rarr;</a></li>
+			  <li><a href="http://www.mprsoftball.org/season_detail/{{ season_prior.year|add:"1" }}/" class="button">{{ season_prior.year|add:"1" }} &rarr;</a></li>
 		  </ul>
         {% endif %}
       </div>
@@ -37,61 +37,68 @@
   <div class="row">
       <div class="one columns"></div>
       <div class="five columns">
-      <h2>{{ season.year }} in Review</h2>
+      <h2>{{ season_prior.year }} in Review</h2>
       <hr>
-      {{ season.recap|safe }}
-      {% if season.captains.count != 0 %}
+      {{ season_prior.recap|safe }}
+      {% if season_prior.captains.count != 0 %}
         <h4>Captains: </h4>
-        <h5>{% for captain in season.captains.all %}
+        <h5>{% for captain in season_prior.captains.all %}
         {{ captain.firstName }} {{ captain.lastName }}<br>
         {% endfor %}
         </h5>
       {% endif %}
-      {% if season.rookies.count != 0 %}
+      {% if season_prior.rookies.count != 0 %}
         <h4>Rookie(s) of the Year: </h4>
-        <h5>{% for rookie in season.rookies.all %}
+        <h5>{% for rookie in season_prior.rookies.all %}
         {{ rookie.firstName }} {{ rookie.lastName }}<br>
         {% endfor %}
         </h5>
       {% endif %}  
-      {% if season.mostimproved.count != 0 %}
+      {% if season_prior.mostimproved.count != 0 %}
         <h4>Most Improved: </h4>
-        <h5>{% for mostimproved in season.mostimproved.all %}
+        <h5>{% for mostimproved in season_prior.mostimproved.all %}
         {{ mostimproved.firstName }} {{ mostimproved.lastName }}<br>
         {% endfor %}
         </h5>
       {% endif %}
-      {% if season.battingchamps.count != 0 %}
+      {% if season_prior.battingchamps.count != 0 %}
         <h4>Batting Champ(s): </h4>
-        <h5>{% for battingchamp in season.battingchamps.all %}
+        <h5>{% for battingchamp in season_prior.battingchamps.all %}
         {{ battingchamp.firstName }} {{ battingchamp.lastName }}<br>
         {% endfor %}
         </h5>
       {% endif %}
-      {% if season.goldengloves.count != 0 %}
+      {% if season_prior.goldengloves.count != 0 %}
         <h4>Golden Glove(s): </h4>
-        <h5>{% for glove in season.goldengloves.all %}
+        <h5>{% for glove in season_prior.goldengloves.all %}
         {{ glove.firstName }} {{ glove.lastName }}<br>
         {% endfor %}
         </h5>
       {% endif %}
-      {% if season.mvp.count != 0 %}
+      {% if season_prior.mvp.count != 0 %}
         <h4>Most Valuable Player(s): </h4>
-        <h5>{% for mvp in season.mvp.all %}
+        <h5>{% for mvp in season_prior.mvp.all %}
         {{ mvp.firstName }} {{ mvp.lastName }}<br>
         {% endfor %}
         </h5>
       {% endif %}
-      {% if season.bombat.count != 0 %}
+      {% if season_prior.bombat.count != 0 %}
         <h4>Bombat: </h4>
-        <h5>{% for bombat in season.bombat.all %}
+        <h5>{% for bombat in season_prior.bombat.all %}
         {{ bombat.firstName }} {{ bombat.lastName }}<br>
         {% endfor %}
         </h5>
       {% endif %}
-      {% if season.whippet.count != 0 %}
+      {% if season_prior.walker.count != 0 %}
+        <h4>Walker Award: </h4>
+        <h5>{% for walker in season_prior.walker.all %}
+        {{ walker.firstName }} {{ walker.lastName }}<br>
+        {% endfor %}
+        </h5>
+      {% endif %}
+      {% if season_prior.whippet.count != 0 %}
         <h4>Whippet(s) of the Year: </h4>
-        <h5>{% for whippet in season.whippet.all %}
+        <h5>{% for whippet in season_prior.whippet.all %}
         {{ whippet.firstName }} {{ whippet.lastName }}<br>
         {% endfor %}
         </h5>
@@ -100,12 +107,27 @@
       <div class="one columns"></div>
       <div class="five columns">
       <h2>Roster:</h2>
-      {% for player in season.roster.all %}
+      {% for player in season_prior.roster.all %}
 		{{ player.lastName }}, {{ player.firstName }}
 		{% if player.alias %}
           (<i>aka</i> {{ player.alias }})
         {% endif %}</br>
 	  {% endfor %}
+      </div>
+      <div class="row">
+        <div class="twelve columns">
+              <div>
+			  {% if photos %}
+				{% load static %}
+				{% get_media_prefix as MEDIA_PREFIX %}
+				<ul class="block-grid ten-up mobile-four-up" data-clearing>
+				{% for photo in photos %}
+				  <li><a href="{{ MEDIA_PREFIX }}{{ photo.image }}"><img data-caption="{{ photo.caption }} {% if photo.year %}[{{ photo.year }}]{% endif %}" src="{{ MEDIA_PREFIX }}{{ photo.image|cut:'.jpg' }}_admin_thumbnail.jpg"></a></li>
+				{% endfor %}
+				</ul>
+			  {% endif %}      
+			  </div>        
+        </div>      
       </div>
   </div>
 

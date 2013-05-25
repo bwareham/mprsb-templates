@@ -135,4 +135,21 @@
     {% endfor %}
     </ul>
 {% endif %}
+
+{% if photos %}
+<div class="row">
+  <div class="twelve columns">
+    <hr>
+    <h5>Photos of {{ player.firstName }}:</h5>
+    {% load static %}
+    {% get_media_prefix as MEDIA_PREFIX %}
+    <ul class="block-grid ten-up mobile-four-up" data-clearing>
+      {% for photo in photos %}
+      <li><a href="{{ MEDIA_PREFIX }}{{ photo.image }}"><img data-caption="{{ photo.caption }} {% if photo.year %}[{{ photo.year }}]{% endif %}" src="{{ MEDIA_PREFIX }}{{ photo.image|cut:".jpg" }}_admin_thumbnail.jpg"></a></li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+  </div>
+  <hr>
+</div>
 {% endblock %}

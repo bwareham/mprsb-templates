@@ -2,6 +2,12 @@
 
 {% block title %}MPR Softball - Photo Gallery{% endblock %}
 
+{% block upper_right_panel %}
+    <h4>Feeling lucky?</h4>
+	<a href="http://www.mprsoftball.org/random_pics.html" class="button" width=100% >10 Random Pics</a>
+
+{% endblock %}
+
 {% block content %}
     <div class="row">
       <div class="twelve columns">
@@ -13,8 +19,41 @@
 		{% else %}
 			<p>Problem with content list.</p>
 		{% endif %}
-  </div>
-    
+	  </div>	
+    </div>
+    <div class="row">
+      <div class="twelve columns">
+      {% if latest_pics %}
+	  <hr>
+      <h5>Latest adds:</h5>
+		{% load static %}
+		{% get_media_prefix as MEDIA_PREFIX %}
+		<ul class="block-grid ten-up mobile-four-up" data-clearing>
+		{% for photo in latest_pics %}
+		  {% if forloop.counter < 11 %}
+		  <li><a href="{{ MEDIA_PREFIX }}{{ photo.image }}"><img data-caption="{{ photo.caption }} {% if photo.year %}[{{ photo.year }}]{% endif %}" src="{{ MEDIA_PREFIX }}{{ photo.image|cut:'.jpg' }}_admin_thumbnail.jpg"></a></li>
+		  {% endif %}
+		{% endfor %}
+		</ul>
+	  {% endif %}
+      </div>
+	  <hr>
+    </div>
+    <div class="row">
+      <div class="twelve columns">
+      {% if photos %}
+      <h5>All pics:</h5>
+		{% load static %}
+		{% get_media_prefix as MEDIA_PREFIX %}
+		<ul class="block-grid ten-up mobile-four-up" data-clearing>
+		{% for photo in photos %}
+		  <li><a href="{{ MEDIA_PREFIX }}{{ photo.image }}"><img data-caption="{{ photo.caption }} {% if photo.year %}[{{ photo.year }}]{% endif %}" src="{{ MEDIA_PREFIX }}{{ photo.image|cut:'.jpg' }}_admin_thumbnail.jpg"></a></li>
+		{% endfor %}
+		</ul>
+	  {% endif %}
+      </div>
+	  <hr>
+    </div>
     
 {% endblock %}
 

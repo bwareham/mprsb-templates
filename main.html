@@ -12,7 +12,7 @@
     Skies: {{ sky }}<br>
     Wind: {{ dir }} {{ wind_mph }} mph<br>
     <br>
-    <strong>{{ period1 }}:</strong> {{ fcst1 }}<br><br>
+    <strong>{{ period1 }}:</strong> {{ fcst1|truncatewords:20 }}<br><br>
 	<a href="#" class="button" data-reveal-id="wxModal" width=100% >More weather</a>
 
 {% endblock %}
@@ -35,11 +35,15 @@
   {% if played_games_list %}
     <h5>Latest score</h5>
     {% with played_games_list|first as latest_game %}
-      {% if latest_game.scoreMPR > latest_game.scoreOPP %}
-        <strong>MPR {{ latest_game.scoreMPR }}</strong> {{ latest_game.opponent }} {{ latest_game.scoreOPP }}
-      {% else %}
-        MPR {{ latest_game.scoreMPR }} <strong>{{ latest_game.opponent }} {{ latest_game.scoreOPP }}</strong>    
-      {% endif %}
+      {% if latest_game.scoreMPR >= 0 and latest_game.scoreOPP >= 0 %}
+		  {% if latest_game.scoreMPR > latest_game.scoreOPP %}
+			<strong>MPR {{ latest_game.scoreMPR }}</strong> {{ latest_game.opponent }} {{ latest_game.scoreOPP }}
+		  {% else %}
+			MPR {{ latest_game.scoreMPR }} <strong>{{ latest_game.opponent }} {{ latest_game.scoreOPP }}</strong>    
+		  {% endif %}
+	  {% else %}
+	      {{ latest_game.DateTime|date:"N j" }}: vs. {{ latest_game.opponent }} N/A
+	  {% endif %}
     {% endwith %}    
   {% endif %}
   <hr>
@@ -82,7 +86,14 @@
 		{% else %}
 			<p>No games are scheduled.</p>
 		{% endif %}
-
+	{% if photos %}
+	{% load static %}
+	{% get_media_prefix as MEDIA_PREFIX %}
+	  <h5>From the Photo Gallery:</h5>
+	  {% with pic=photos|random %}
+	  	  <a href="/photos/"><img src="{{ MEDIA_PREFIX }}{{ pic.image }}"></a>
+	  {% endwith %}
+	{% endif %}
 	<a class="large button" href="/directions.html">Directions to field</a>
 	
 	<a class="large button" href="https://www.facebook.com/pages/MPR-Softball/103512325990?ref=ts&fref=ts" target="_blank"><strong>Follow on </strong><br><img alt="Facebook" src="/static/images/facebook.png"></a>

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}MPR Softball - Random Photos{% endblock %}
+
+
+{% block content %}
+    <div class="row">
+      <div class="twelve columns">
+      {% if photos %}
+        <h4>10 random photos from the Photo Gallery:</h4>
+		<p><i>Click on a thumbnail for fullscreen slideshow</i></p>
+		{% load static %}
+		{% get_media_prefix as MEDIA_PREFIX %}
+		<ul class="block-grid ten-up mobile-four-up" data-clearing>
+		{% for photo in photos %}
+		  {% if forloop.counter < 11 %}
+		  <li><a href="{{ MEDIA_PREFIX }}{{ photo.image }}"><img data-caption="{{ photo.caption }} {% if photo.year %}[{{ photo.year }}]{% endif %}" src="{{ MEDIA_PREFIX }}{{ photo.image|cut:".jpg" }}_admin_thumbnail.jpg"></a></li>
+		  {% endif %}
+		{% endfor %}
+		</ul>
+        <hr>
+	  {% endif %}
+      </div>
+	  <hr>
+    </div>
+
+	<div class="row">
+	  <div class="twelve columns">
+	    <a class="large button" href="/photos/">Main Photo Gallery</a>
+	    <a class="large button" href="/random_pics.html">10 More Random Pics</a>
+	  </div>
+	</div>
+{% endblock %}

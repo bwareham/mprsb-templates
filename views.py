@@ -1,5 +1,6 @@
 from django.template import Context, loader
 from rostermaker.models import Player
+from photo.models import Photo
 from django.http import HttpResponse
 
 
