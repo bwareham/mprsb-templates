@@ -34,6 +34,7 @@
         {% endif %}
       </div>
   </div>
+  <hr>
   <div class="row">
       <div class="six columns">
       <h2>{{ season_prior.year }} in Review</h2>
@@ -116,13 +117,16 @@
 	  <div>
 	  {% if photos %}
 	    <hr>
+	    <a id="photos"></a>
 	    <h2>Season Photos</h2>
 	    <p><i>Click on thumbnail for slideshow</i></p>
 		{% load static %}
 		{% get_media_prefix as MEDIA_PREFIX %}
-		<ul class="block-grid four-up mobile-four-up" data-clearing>
+		<ul class="block-grid four-up" data-clearing>
 		{% for photo in photos %}
-		  <li><a href="{{ MEDIA_PREFIX }}{{ photo.image }}"><img data-caption="{{ photo.caption }} {% if photo.year %}[{{ photo.year }}]{% endif %}" src="{{ MEDIA_PREFIX }}{{ photo.image|cut:'.jpg' }}_admin_thumbnail.jpg"></a></li>
+		  <li><a href="{{ MEDIA_PREFIX }}{{ photo.image }}">
+		  <img data-caption="{{ photo.caption }} {% if photo.year %}[{{ photo.year }}]{% endif %}" 
+		  src="{{ MEDIA_PREFIX }}{{ photo.image|cut:'.jpg' }}_admin_thumbnail.jpg"></a></li>
 		{% endfor %}
 		</ul>
 	  {% endif %}      

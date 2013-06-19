@@ -9,36 +9,305 @@
 {% endblock %}
 
 {% block content %}
+<div class="hide-for-small">
   <div class="row">
     <div class="twelve columns">
-		{% if content_list %}
-			{% for item in content_list %}
-				<h3>{{ item.title  }}</h3>
-				{{  item.content|safe  }}
-			{% endfor %}
-		{% else %}
-			<p>Problem with content list.</p>
-		{% endif %}
-	</div>
+    <h2>History</h2>
+	  <hr>
+		<div id="featuredContent" style="background-color:#c6d6da">
+          {% for season in random_seasons %}
+		  <div>
+		    <a href="http://www.mprsoftball.org/season_detail/{{ season.year }}/">
+			<h4>From {{ season.year }}:</h4>
+			<p>{{ season.recap|safe|truncatewords_html:'20' }}</p>
+			</a>
+		  </div>
+		  {% endfor %}
+		</div>
+		<hr>
+		<h4>Quicklinks</h4>
+		<p><i>Lots of history details are contained on the season and player pages:</i></p>
+		<div class="row">
+			<div class="three columns">
+				<form action="/season_quicklink/" method="get">
+						{{ season_choice.as_p }}
+				</form>
+			</div>
+			<div class="three columns">
+				<form action="/player_quicklink/" method="get">
+						{{ player_choice.as_p }}
+				</form>
+			</div>
+		</div>
+      <hr>
+    </div>
   </div>
+</div>
   <div class="row">
-    <div class="one columns"></div>
-      <div class="two columns">
-        <ul>
-          {% for season in seasons %}
-            {% if forloop.counter|divisibleby:column_counts %}
-            <li><a href="http://www.mprsoftball.org/season_detail/{{ season.year }}/">{{ season.year }}</a></li>
-            </div>
-            <div class="two columns">
-            <ul>
-            {% else %}
-            <li><a href="http://www.mprsoftball.org/season_detail/{{ season.year }}/">{{ season.year }}</a></li>
-            {% endif %}
-          {% endfor %}
-        </ul>
-      </div>  
+    <div class="eight columns">
+      <h4>Audio histories</h4>
+    	{% load static %}
+		{% get_media_prefix as MEDIA_PREFIX %}
+		<div class="two columns">
+		  <p><img alt="eichten" src="{{ MEDIA_PREFIX }}uploads/gary_head-1_small.jpg" 
+		  align="left"></p>
+		</div>
+		<div class="eight columns">
+		  <p>Team founder Gary Eichten spoke with Jim Bickal about the early days:</p>
+		  <p> 
+		    <audio controls>
+			<source src="{{ MEDIA_PREFIX }}audio/eichten_hist.ogg" type="audio/ogg">
+			<source src="{{ MEDIA_PREFIX }}audio/eichten_hist.mp3" type="audio/mpeg">
+			Your browser does not support the audio element. Do yourself a favor and
+			upgrade your browser. You'll enjoy the Internet more.
+			</audio>
+		  </p>
+		  		<p>Appropriately, the first two Eichten Fellows prepared softball histories for their projects.</p>
+		<p>Will Moore's softball history:</p>
+		<p>
+		<audio controls>
+			<source src="{{ MEDIA_PREFIX }}audio/moore_hist.ogg" type="audio/ogg">
+			<source src="{{ MEDIA_PREFIX }}audio/moore_hist.mp3" type="audio/mpeg">
+			Your browser does not support the audio element. Do yourself a favor and
+			upgrade your browser. You'll enjoy the Internet more.
+		</audio>
+		</p>
+		<p>Heather Beckius's softball history:</p>
+		<p>
+		<audio controls>
+			<source src="{{ MEDIA_PREFIX }}audio/beckius_hist.ogg" type="audio/ogg">
+			<source src="{{ MEDIA_PREFIX }}audio/beckius_hist.mp3" type="audio/mpeg">
+			Your browser does not support the audio element. Do yourself a favor and
+			upgrade your browser. You'll enjoy the Internet more.
+		</audio>
+		</p>
+
+		</div>
+	</div>
+	<div class="four columns">
+	<ul class="accordion">
+	  <li>
+		<div class="title">
+		  <h5>Captains</h5>
+		</div>
+		<div class="content">
+		  {% for season in seasons %}
+		  {% if season.captains.count > 0 %}
+		  <strong>{{ season.year }}: </strong>
+		    {% for player in season.captains.all %}
+		      {% if forloop.last %}
+		        {{ player.firstName }} {{ player.lastName }}<br>
+		      {% else %}
+		        {{ player.firstName }} {{ player.lastName }}, 
+		      {% endif %}
+		    {% endfor %}
+		  {% endif %}
+		{% endfor %}
+		</div>
+	  </li>
+	  <li>
+		<div class="title">
+		  <h5>Rookies of the Year</h5>
+		</div>
+		<div class="content">
+		  {% for season in seasons %}
+		  {% if season.rookies.count > 0 %}
+		    <strong>{{ season.year }}: </strong>
+		    {% for player in season.rookies.all %}
+		      {% if forloop.last %}
+		        {{ player.firstName }} {{ player.lastName }}<br>
+		      {% else %}
+		        {{ player.firstName }} {{ player.lastName }}, 
+		      {% endif %}
+		    {% endfor %}
+		  {% endif %}
+		{% endfor %}
+		</div>
+	  </li>
+	  <li>
+		<div class="title">
+		  <h5>Most Valuable Players</h5>
+		</div>
+		<div class="content">
+		  {% for season in seasons %}
+		  {% if season.mvp.count > 0 %}
+		  <strong>{{ season.year }}: </strong>
+		    {% for player in season.mvp.all %}
+		      {% if forloop.last %}
+		        {{ player.firstName }} {{ player.lastName }}<br>
+		      {% else %}
+		        {{ player.firstName }} {{ player.lastName }}, 
+		      {% endif %}
+		    {% endfor %}
+		  {% endif %}
+		{% endfor %}
+		</div>
+	  </li>
+	  <li>
+		<div class="title">
+		  <h5>Batting Champs</h5>
+		</div>
+		<div class="content">
+		  {% for season in seasons %}
+		  {% if season.battingchamps.count > 0 %}
+		  <strong>{{ season.year }}: </strong>
+		    {% for player in season.battingchamps.all %}
+		      {% if forloop.last %}
+		        {{ player.firstName }} {{ player.lastName }}<br>
+		      {% else %}
+		        {{ player.firstName }} {{ player.lastName }}, 
+		      {% endif %}
+		    {% endfor %}
+		  {% endif %}
+		{% endfor %}
+		</div>
+	  </li>
+	  <li>
+		<div class="title">
+		  <h5>Golden Gloves</h5>
+		</div>
+		<div class="content">
+		  {% for season in seasons %}
+		  {% if season.goldengloves.count > 0 %}
+		  <strong>{{ season.year }}: </strong>
+		    {% for player in season.goldengloves.all %}
+		      {% if forloop.last %}
+		        {{ player.firstName }} {{ player.lastName }}<br>
+		      {% else %}
+		        {{ player.firstName }} {{ player.lastName }}, 
+		      {% endif %}
+		    {% endfor %}
+		  {% endif %}
+		{% endfor %}
+		</div>
+	  </li>
+	  <li>
+		<div class="title">
+		  <h5>Most Improved</h5>
+		</div>
+		<div class="content">
+		  {% for season in seasons %}
+		  {% if season.mostimproved.count > 0 %}
+		  <strong>{{ season.year }}: </strong>
+		    {% for player in season.mostimproved.all %}
+		      {% if forloop.last %}
+		        {{ player.firstName }} {{ player.lastName }}<br>
+		      {% else %}
+		        {{ player.firstName }} {{ player.lastName }}, 
+		      {% endif %}
+		    {% endfor %}
+		  {% endif %}
+		{% endfor %}
+		</div>
+	  </li>
+	  <li>
+		<div class="title">
+		  <h5>Whippet of the Year</h5>
+		</div>
+		<div class="content">
+		  {% for season in seasons %}
+		  {% if season.whippet.count > 0 %}
+		  <strong>{{ season.year }}: </strong>
+		    {% for player in season.whippet.all %}
+		      {% if forloop.last %}
+		        {{ player.firstName }} {{ player.lastName }}<br>
+		      {% else %}
+		        {{ player.firstName }} {{ player.lastName }}, 
+		      {% endif %}
+		    {% endfor %}
+		  {% endif %}
+		{% endfor %}
+		</div>
+	  </li>
+	  <li>
+		<div class="title">
+		  <h5>Bombat Winners</h5>
+		</div>
+		<div class="content">
+		  {% for season in seasons %}
+		  {% if season.bombat.count > 0 %}
+		  <strong>{{ season.year }}: </strong>
+		    {% for player in season.bombat.all %}
+		      {% if forloop.last %}
+		        {{ player.firstName }} {{ player.lastName }}<br>
+		      {% else %}
+		        {{ player.firstName }} {{ player.lastName }}, 
+		      {% endif %}
+		    {% endfor %}
+		  {% endif %}
+		{% endfor %}
+		</div>
+	  </li>
+	  <li>
+		<div class="title">
+		  <h5>Walker Award</h5>
+		</div>
+		<div class="content">
+		  {% for season in seasons %}
+		  {% if season.walker.count > 0 %}
+		  <strong>{{ season.year }}: </strong>
+		    {% for player in season.walker.all %}
+		      {% if forloop.last %}
+		        {{ player.firstName }} {{ player.lastName }}<br>
+		      {% else %}
+		        {{ player.firstName }} {{ player.lastName }}, 
+		      {% endif %}
+		    {% endfor %}
+		  {% endif %}
+		{% endfor %}
+		</div>
+	  </li>
+
+	</ul>
+	
+	<h4>For more history see:</h4>
+		<a class="large button" href="/hall">The Hall of Fame</a>
+	    <a class="large button" href="/photos">The Photo Gallery</a>
+
+	</div>
+	<hr>
+  </div>
+
+  <div class="row">
+	  <div class="twelve columns">
+	  <a id="links"></a>
+	  <h4>Prior seasons</h4>
+	  <p>Click on a link for recaps, rosters and photos from that year</p>
+
+		  <div class="two columns">
+			<ul>
+			  {% for season in seasons %}
+				{% if forloop.counter|divisibleby:column_counts %}
+				<li><a href="http://www.mprsoftball.org/season_detail/{{ season.year }}/">{{ season.year }}</a></li>
+				</div>
+				<div class="two columns">
+				<ul>
+				{% else %}
+				<li><a href="http://www.mprsoftball.org/season_detail/{{ season.year }}/">{{ season.year }}</a></li>
+				{% endif %}
+			  {% endfor %}
+			</ul>
+		  </div>
+	  </div>  
   </div>
     
     
 {% endblock %}
 
+{% block orbit %}
+
+<script type='text/javascript'>
+   $(window).load(function() {
+       $('#featuredContent').orbit({
+         animation: 'fade',
+         animationSpeed: '120000',
+         advanceSpeed: '6000',
+         pauseOnHover: 'true',
+         startClockOnMouseOut: true,        // if clock should start on MouseOut
+         startClockOnMouseOutAfter: 1000,    // how long after MouseOut should the timer start again
+         directionalNav: false,        
+         fluid: '16x2', });
+   });
+</script>
+
+{% endblock %}

@@ -148,7 +148,7 @@
       <li><a href="{{ MEDIA_PREFIX }}{{ photo.image }}"><img data-caption="{{ photo.caption }} {% if photo.year %}[{{ photo.year }}]{% endif %}" src="{{ MEDIA_PREFIX }}{{ photo.image|cut:".jpg" }}_admin_thumbnail.jpg"></a></li>
       {% endfor %}
     </ul>
-    {% endif %}
   </div>
 </div>
+{% endif %}
 {% endblock %}

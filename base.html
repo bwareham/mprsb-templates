@@ -37,7 +37,7 @@
 			  <section>
 				<ul class="left">
 				  <li><a href="/current">This Season</a></li>
-				  <li><a href="/season">Prior Seasons</a></li>
+				  <li><a href="/season">History</a></li>
 				  <li><a href="/players">All-time Roster</a></li>
 				  <li><a href="/photos">Photo Gallery</a></li>
 				  <li><a href="/hall">Hall of Fame</a></li>
@@ -100,22 +100,7 @@
   <!-- Initialize JS Plugins -->
   <script src="/static/javascripts/app.js"></script>
 
-
-<!--Orbit script NOT NEEDED-->    
-<!--
-<script type='text/javascript'>
-   $(window).load(function() {
-       $('#featuredContent').orbit({
-         animation: 'horizontal-slide',
-         advanceSpeed: 8000,
-         pauseOnHover: true, 
-         startClockOnMouseOut: true,        // if clock should start on MouseOut
-         startClockOnMouseOutAfter: 800,
-         directionalNav: true,  
-         fluid: '10x1',
-   });
-   });
-</script>
--->  
+{% block orbit %}{% endblock %}
+  
 </body>
 </html>
