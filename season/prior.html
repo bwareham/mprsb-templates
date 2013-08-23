@@ -1,11 +1,10 @@
 {% extends "base.html" %}
 
-{% block title %}MPR Softball - Prior Seasons{% endblock %}
+{% block title %}MPR Softball - History{% endblock %}
 
 {% block upper_right_panel %}
 <h4>Franchise record:</h4>
 <h4>{{ pastWins.wins__sum|add:wins }} - {{ pastLosses.losses__sum|add:losses }} - {{ pastTies.ties__sum|add:ties }}</h4>
-<i>*missing W/L records for 2011-12</i>
 {% endblock %}
 
 {% block content %}
@@ -19,32 +18,39 @@
 		  <div>
 		    <a href="http://www.mprsoftball.org/season_detail/{{ season.year }}/">
 			<h4>From {{ season.year }}:</h4>
-			<p>{{ season.recap|safe|truncatewords_html:'20' }}</p>
+			<p>{{ season.recap|safe|truncatewords_html:'20' }}READ MORE</p>
 			</a>
 		  </div>
 		  {% endfor %}
-		</div>
-		<hr>
-		<h4>Quicklinks</h4>
-		<p><i>Lots of history details are contained on the season and player pages:</i></p>
-		<div class="row">
-			<div class="three columns">
-				<form action="/season_quicklink/" method="get">
-						{{ season_choice.as_p }}
-				</form>
-			</div>
-			<div class="three columns">
-				<form action="/player_quicklink/" method="get">
-						{{ player_choice.as_p }}
-				</form>
-			</div>
-		</div>
+		</div>		
       <hr>
     </div>
   </div>
 </div>
+<div class="row">
+
+</div>
   <div class="row">
     <div class="eight columns">
+
+    <h4>Quicklinks</h4>
+		<p><i>Lots of historical details are contained on the season and player pages:</i></p>
+
+		<div class="row">
+		  <div class="twelve columns">
+			<div class="four columns">
+				<form action="/season_quicklink/" method="get">
+						{{ season_choice.as_p }}
+				</form>
+			</div>
+			<div class="four columns">
+				<form action="/player_quicklink/" method="get">
+						{{ player_choice.as_p }}
+				</form>
+			</div>
+			<hr>
+		  </div>
+		</div>
       <h4>Audio histories</h4>
     	{% load static %}
 		{% get_media_prefix as MEDIA_PREFIX %}
@@ -267,7 +273,7 @@
 	</div>
 	<hr>
   </div>
-
+{% comment %}
   <div class="row">
 	  <div class="twelve columns">
 	  <a id="links"></a>
@@ -290,7 +296,7 @@
 		  </div>
 	  </div>  
   </div>
-    
+{% endcomment %}    
     
 {% endblock %}
 

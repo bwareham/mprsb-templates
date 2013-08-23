@@ -11,8 +11,9 @@
 {% block content %}
 <table>
   <tr>
-  <td><strong>Player</strong>
-  </td><td><strong>Avg</strong></td>
+  <td><strong>Player</strong></td>
+  <td><strong>Avg</strong></td>
+  <td><strong>G</strong></td>
   <td><strong>AB</strong></td>
   <td><strong>1B</strong></td>
   <td><strong>2B</strong></td>
@@ -29,6 +30,7 @@
     <tr>
     <td>{{ item.name }}</td>
     <td>{{ item.avg|floatformat:3 }}</td>
+	<td>{{ item.games }}</td>
     <td>{{ item.ab }}</td><td>{{ item.sing }}</td>
     <td>{{ item.doub }}</td><td>{{ item.trip }}</td>
     <td>{{ item.hr }}</td>

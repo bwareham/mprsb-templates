@@ -17,28 +17,49 @@
       <div class="twelve columns">
 	    {% if season_prior.year = 1981 %}
 		  <ul class="button-group even two-up">
-			  <li><a href="http://www.mprsoftball.org/season/" class="button">All seasons</a></li>
+			  <li><div href="#" class="button dropdown">
+                 All
+			     <ul>
+					{% for season in seasons %}
+						<li><a href="/season_detail/{{ season.year }}">{{ season.year }}</a></li>
+					{% endfor %}
+				 </ul>
+			  </div></li>
 			  <li><a href="http://www.mprsoftball.org/season_detail/{{ season_prior.year|add:"1" }}/" class="button">{{ season_prior.year|add:"1" }} &rarr;</a></li>
 		  </ul>
 		{% elif season_prior.year|add:"1" = current_year %}
 		  <ul class="button-group even two-up">
 			  <li><a href="http://www.mprsoftball.org/season_detail/{{ season_prior.year|add:"-1" }}/" class="button">&larr; {{ season_prior.year|add:"-1" }}</a></li>
-			  <li><a href="http://www.mprsoftball.org/season/" class="button">All seasons</a></li>
+			  <li><div href="#" class="button dropdown">
+                 All
+			     <ul>
+					{% for season in seasons %}
+						<li><a href="/season_detail/{{ season.year }}">{{ season.year }}</a></li>
+					{% endfor %}
+				 </ul>
+			  </div></li>
 		  </ul>
 		{% else %}
           <ul class="button-group even three-up">
 			  <li><a href="http://www.mprsoftball.org/season_detail/{{ season_prior.year|add:"-1" }}/" class="button">&larr; {{ season_prior.year|add:"-1" }}</a></li>
-			  <li><a href="http://www.mprsoftball.org/season/" class="button">All seasons</a></li>
+			  <li><div href="#" class="button dropdown">
+                 All
+			     <ul>
+					{% for season in seasons %}
+						<li><a href="/season_detail/{{ season.year }}">{{ season.year }}</a></li>
+					{% endfor %}
+				 </ul>
+			  </div></li>
 			  <li><a href="http://www.mprsoftball.org/season_detail/{{ season_prior.year|add:"1" }}/" class="button">{{ season_prior.year|add:"1" }} &rarr;</a></li>
 		  </ul>
         {% endif %}
       </div>
   </div>
-  <hr>
+  <hr />
   <div class="row">
       <div class="six columns">
       <h2>{{ season_prior.year }} in Review</h2>
-      <hr>
+      <hr />
       {{ season_prior.recap|safe }}
       {% if season_prior.captains.count != 0 %}
         <h4>Captains: </h4>
@@ -107,7 +128,7 @@
       <div class="one columns"></div>
       <div class="five columns">
       <h2>Roster</h2>
-      <hr>
+      <hr />
       {% for player in season_prior.roster.all %}
 		{{ player.lastName }}, {{ player.firstName }}
 		{% if player.alias %}
@@ -116,7 +137,7 @@
 	  {% endfor %}
 	  <div>
 	  {% if photos %}
-	    <hr>
+	    <hr />
 	    <a id="photos"></a>
 	    <h2>Season Photos</h2>
 	    <p><i>Click on thumbnail for slideshow</i></p>
