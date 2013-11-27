@@ -8,10 +8,17 @@
 
 
 {% block upper_right_panel %}
-<h4>Season record:</h4>
-<h4>{{ wins }} - {{ losses }}{% if ties %} - {{ ties }}{% endif %}</h4>
-<h5>Franchise record:</h5>
-<h5>{{ pastWins.wins__sum|add:wins }} - {{ pastLosses.losses__sum|add:losses }} - {{ pastTies.ties__sum|add:ties }}</h5>
+{% if current_season %}
+    <h4>Season record:</h4>
+    <h4>{{ wins }} - {{ losses }}{% if ties %} - {{ ties }}{% endif %}</h4>
+    <h5>Franchise record:</h5>
+    <h5>{{ pastWins.wins__sum }} - {{ pastLosses.losses__sum }} - {{ pastTies.ties__sum }}</h5>
+{% else %}
+    <h4>Season record:</h4>
+    <h4>{{ wins }} - {{ losses }}{% if ties %} - {{ ties }}{% endif %}</h4>
+    <h5>Franchise record:</h5>
+    <h5>{{ pastWins.wins__sum|add:wins }} - {{ pastLosses.losses__sum|add:losses }} - {{ pastTies.ties__sum|add:ties }}</h5>
+{% endif %}
 {% endblock %}
 
 {% block content %}

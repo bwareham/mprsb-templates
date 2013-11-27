@@ -8,14 +8,14 @@
     <h1>Season:</h1>
     <h2>{{ season_prior.year }}</h2>
     <h3>Record:</h3>
-    <h4>{{ season_prior.wins }} - {{ season_prior.losses }}{% if season_prior.ties %} - {{season_prior.ties }}{% endif %}</h4>
+    <h4>{{ season_prior.wins }} - {{ season_prior.losses }}{% if season_prior.ties %} - {{ season_prior.ties }}{% endif %}</h4>
 
 {% endblock %}
 
 {% block content %}
   <div class="row">
       <div class="twelve columns">
-	    {% if season_prior.year = 1981 %}
+	    {% if season_prior.year = first_season %}
 		  <ul class="button-group even two-up">
 			  <li><div href="#" class="button dropdown">
                  All
@@ -27,7 +27,7 @@
 			  </div></li>
 			  <li><a href="http://www.mprsoftball.org/season_detail/{{ season_prior.year|add:"1" }}/" class="button">{{ season_prior.year|add:"1" }} &rarr;</a></li>
 		  </ul>
-		{% elif season_prior.year|add:"1" = current_year %}
+		{% elif season_prior.year = last_season %}
 		  <ul class="button-group even two-up">
 			  <li><a href="http://www.mprsoftball.org/season_detail/{{ season_prior.year|add:"-1" }}/" class="button">&larr; {{ season_prior.year|add:"-1" }}</a></li>
 			  <li><div href="#" class="button dropdown">
