@@ -60,8 +60,11 @@
       <div class="six columns">
       <h2>{{ season_prior.year }} in Review</h2>
       <hr />
+	  <div class="panel-alt">
       {{ season_prior.recap|safe }}
+	  </div>
       {% if season_prior.captains.count != 0 %}
+		<div class="panel-alt">
         <h4>Captains: </h4>
         <h5>{% for captain in season_prior.captains.all %}
         {{ captain.firstName }} {{ captain.lastName }}<br>
@@ -124,17 +127,20 @@
         {% endfor %}
         </h5>
       {% endif %}
+	  </div>
       </div>
       <div class="one columns"></div>
       <div class="five columns">
       <h2>Roster</h2>
       <hr />
+	  <div class="panel-alt">
       {% for player in season_prior.roster.all %}
 		{{ player.lastName }}, {{ player.firstName }}
 		{% if player.alias %}
           (<i>aka</i> {{ player.alias }})
         {% endif %}</br>
 	  {% endfor %}
+	  </div>
 	  <div>
 	  {% if photos %}
 	    <hr />
@@ -146,7 +152,21 @@
 		<ul class="block-grid four-up" data-clearing>
 		{% for photo in photos %}
 		  <li><a href="{{ MEDIA_PREFIX }}{{ photo.image }}">
-		  <img data-caption="{{ photo.caption }} {% if photo.year %}[{{ photo.year }}]{% endif %}" 
+		  <img data-caption="
+		  {% if photo.caption %}
+		    {{ photo.caption }} 
+		  {% elif photo.player_tag %}
+		    {% with photo.player_tag.all as pictured %}
+		      {% for player in pictured %}
+		        {% if forloop.last %}
+					{{ player.firstName }} {{ player.lastName }}
+				{% else %}
+					{{ player.firstName }} {{ player.lastName }},
+				{% endif %}					
+			  {% endfor %}		
+		    {% endwith %}
+		  {% endif %} 
+		  {% if photo.year %}[{{ photo.year }}]{% endif %}"
 		  src="{{ MEDIA_PREFIX }}{{ photo.image|cut:'.jpg' }}_admin_thumbnail.jpg"></a></li>
 		{% endfor %}
 		</ul>

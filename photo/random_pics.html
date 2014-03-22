@@ -14,7 +14,22 @@
 		<ul class="block-grid ten-up mobile-four-up" data-clearing>
 		{% for photo in photos %}
 		  {% if forloop.counter < 11 %}
-		  <li><a href="{{ MEDIA_PREFIX }}{{ photo.image }}"><img data-caption="{{ photo.caption }} {% if photo.year %}[{{ photo.year }}]{% endif %}" src="{{ MEDIA_PREFIX }}{{ photo.image|cut:".jpg" }}_admin_thumbnail.jpg"></a></li>
+		  <li><a href="{{ MEDIA_PREFIX }}{{ photo.image }}"><img data-caption="
+		  {% if photo.caption %}
+		    {{ photo.caption }} 
+		  {% elif photo.player_tag %}
+		    {% with photo.player_tag.all as pictured %}
+		      {% for player in pictured %}
+		        {% if forloop.last %}
+					{{ player.firstName }} {{ player.lastName }}
+				{% else %}
+					{{ player.firstName }} {{ player.lastName }},
+				{% endif %}					
+			  {% endfor %}		
+		    {% endwith %}
+		  {% endif %} 
+		  {% if photo.year %}[{{ photo.year }}]{% endif %}"
+		  src="{{ MEDIA_PREFIX }}{{ photo.image|cut:'.jpg' }}_admin_thumbnail.jpg"></a></li>
 		  {% endif %}
 		{% endfor %}
 		</ul>

@@ -7,7 +7,7 @@
     <h4>Franchise record:</h4>
     <h5>{{ pastWins.wins__sum }} - {{ pastLosses.losses__sum }} - {{ pastTies.ties__sum }}</h5>
 {% else %}
-    <h4>Franchise record:</h4>
+    <h4>Franchise record:</h4 >
     <h5>{{ pastWins.wins__sum|add:wins }} - {{ pastLosses.losses__sum|add:losses }} - {{ pastTies.ties__sum|add:ties }}</h5>
 {% endif %}
 {% endblock %}
