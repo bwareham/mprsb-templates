@@ -24,6 +24,7 @@
     <div class="row">
       <div class="twelve columns">
       {% if latest_pics %}
+	  {% load fb_versions %}
 	  <hr>
       <h5>Latest adds:</h5>
 		{% load static %}
@@ -46,7 +47,7 @@
 		    {% endwith %}
 		  {% endif %} 
 		  {% if photo.year %}[{{ photo.year }}]{% endif %}"
-		  src="{{ MEDIA_PREFIX }}{{ photo.image|cut:'.jpg' }}_admin_thumbnail.jpg"></a></li>
+		  src="{% version photo.image 'small' %}"></a></li>
 		  {% endif %}
 		{% endfor %}
 		</ul>
@@ -57,6 +58,7 @@
     <div class="row">
       <div class="twelve columns">
       {% if photos %}
+	  {% load fb_versions %}
       <h5>All pics:</h5>
 		{% load static %}
 		{% get_media_prefix as MEDIA_PREFIX %}
@@ -77,7 +79,7 @@
 		    {% endwith %}
 		  {% endif %} 
 		  {% if photo.year %}[{{ photo.year }}]{% endif %}"
-		  src="{{ MEDIA_PREFIX }}{{ photo.image|cut:'.jpg' }}_admin_thumbnail.jpg"></a></li>
+		  src="{% version photo.image 'small' %}"></a></li>
 		{% endfor %}
 		</ul>
 	  {% endif %}

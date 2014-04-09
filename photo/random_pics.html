@@ -7,6 +7,7 @@
     <div class="row">
       <div class="twelve columns">
       {% if photos %}
+	  {% load fb_versions %}
         <h4>10 random photos from the Photo Gallery:</h4>
 		<p><i>Click on a thumbnail for fullscreen slideshow</i></p>
 		{% load static %}
@@ -29,7 +30,7 @@
 		    {% endwith %}
 		  {% endif %} 
 		  {% if photo.year %}[{{ photo.year }}]{% endif %}"
-		  src="{{ MEDIA_PREFIX }}{{ photo.image|cut:'.jpg' }}_admin_thumbnail.jpg"></a></li>
+		  src="{% version photo.image 'small' %}"></a></li>
 		  {% endif %}
 		{% endfor %}
 		</ul>

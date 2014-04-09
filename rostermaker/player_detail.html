@@ -137,6 +137,7 @@
 {% endif %}
 
 {% if photos %}
+{% load fb_versions %}
 <div class="row">
   <div class="twelve columns">
     <hr>
@@ -160,7 +161,7 @@
 		    {% endwith %}
 		  {% endif %} 
 		  {% if photo.year %}[{{ photo.year }}]{% endif %}"
-		  src="{{ MEDIA_PREFIX }}{{ photo.image|cut:'.jpg' }}_admin_thumbnail.jpg"></a></li>
+		  src="{% version photo.image 'small' %}"></a></li>
       {% endfor %}
     </ul>
   </div>

@@ -143,6 +143,7 @@
 	  </div>
 	  <div>
 	  {% if photos %}
+	  {% load fb_versions %}
 	    <hr />
 	    <a id="photos"></a>
 	    <h2>Season Photos</h2>
@@ -167,7 +168,7 @@
 		    {% endwith %}
 		  {% endif %} 
 		  {% if photo.year %}[{{ photo.year }}]{% endif %}"
-		  src="{{ MEDIA_PREFIX }}{{ photo.image|cut:'.jpg' }}_admin_thumbnail.jpg"></a></li>
+		  src="{% version photo.image 'small' %}"></a></li>
 		{% endfor %}
 		</ul>
 	  {% endif %}      
