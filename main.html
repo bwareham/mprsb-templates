@@ -33,16 +33,20 @@
   </div>
   <div class="three columns">
   {% if played_games_list %}
-    <h5>Latest score</h5>
+    <h5>Latest score:</h5>
     {% with played_games_list|first as latest_game %}
       {% if latest_game.scoreMPR >= 0 and latest_game.scoreOPP >= 0 %}
 		  {% if latest_game.scoreMPR > latest_game.scoreOPP %}
-			<strong>MPR {{ latest_game.scoreMPR }}</strong> {{ latest_game.opponent }} {{ latest_game.scoreOPP }}
+			<h6>{{ latest_game.when|date:"N j" }}:</h6>
+			<strong>MPR {{ latest_game.scoreMPR }}</strong><br>
+			{{ latest_game.opponent }} {{ latest_game.scoreOPP }}
 		  {% else %}
-			MPR {{ latest_game.scoreMPR }} <strong>{{ latest_game.opponent }} {{ latest_game.scoreOPP }}</strong>    
+		    <h6>{{ latest_game.when|date:"N j" }}:</h6>
+			MPR {{ latest_game.scoreMPR }}<br>
+			<strong>{{ latest_game.opponent }} {{ latest_game.scoreOPP }}</strong>    
 		  {% endif %}
 	  {% else %}
-	      {{ latest_game.DateTime|date:"N j" }}: vs. {{ latest_game.opponent }} N/A
+	      {{ latest_game.when|date:"N j" }}: vs. {{ latest_game.opponent }} N/A
 	  {% endif %}
     {% endwith %}    
   {% endif %}
@@ -55,7 +59,7 @@
 			{% if forloop.first %}
 			<li class="active">
 			  <div class="title">
-			    <h5>{{ game.DateTime|date:"N j, P" }}</h5>
+			    <h5>{{ game.when|date:"N j, P" }}</h5>
 			    <strong>At {{game.location}} vs. {{game.opponent}}</strong><br>
 			  </div>
 			  <div class="content">
@@ -68,7 +72,7 @@
 			{% else %}
 			<li>
 			  <div class="title">
-			    <h5>{{ game.DateTime|date:"N j, P" }}</h5>
+			    <h5>{{ game.when|date:"N j, P" }}</h5>
 			    <strong>At {{game.location}} vs. {{game.opponent}}</strong><br>
 			  </div>
 			  <div class="content">

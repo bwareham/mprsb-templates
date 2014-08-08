@@ -36,7 +36,7 @@
 	</div>
 
 	<div class="row">
-	    <div class="four columns">
+	    <div class="three columns">
 	    <h4>Scores</h4>
 	    <hr>
 			{% if played_games_list %}
@@ -44,12 +44,12 @@
 				<ul>
 				{% if game.scoreMPR >= 0 and game.scoreOPP >= 0 %}
 					{% if game.scoreMPR > game.scoreOPP %}
-					  <li>{{ game.DateTime|date:"N j" }}: <strong>MPR {{ game.scoreMPR }}</strong> {{ game.opponent }} {{ game.scoreOPP }}
+					  <li><i>{{ game.when|date:"N j" }}:</i><br><strong>MPR {{ game.scoreMPR }}</strong><br> {{ game.opponent }} {{ game.scoreOPP }}
 					{% else %}
-					  <li>{{ game.DateTime|date:"N j" }}: MPR {{ game.scoreMPR }} <strong>{{ game.opponent }} {{ game.scoreOPP }}</strong>    
+					  <li><i>{{ game.when|date:"N j" }}:</i><br>MPR {{ game.scoreMPR }}<br><strong>{{ game.opponent }} {{ game.scoreOPP }}</strong>    
 					{% endif %}
 				{% else %}
-				    <li>{{ game.DateTime|date:"N j" }}: vs. {{ game.opponent }} N/A</li>
+				    <li>{{ game.when|date:"N j" }}: vs. {{ game.opponent }} N/A</li>
 				{% endif %}
 				</ul>
 			  {% endfor %}
@@ -57,9 +57,10 @@
 			  No games
 			{% endif %}
 		</div>
-		<div class="four columns">
+		<div class="six columns">
 		<h4>Leaders</h4>
 		<hr>
+		<div class="six columns">
 		<h6>Batting average</h4>
 		{% with totals|dictsortreversed:"avg" as leaders_avg %}
 		  <table>
@@ -96,8 +97,71 @@
 			{% endfor %}
 		  </table>
 		{% endwith %}
+		<h6>Runs</h4>
+		{% with totals|dictsortreversed:"runs" as leaders_runs %}
+		  <table>
+			{% for item in leaders_runs %}
+				{% if item.runs >= leaders_runs.2.runs and item.runs != 0 %}
+				  <tr>
+					<td>{{ item.name }}</td><td>{{ item.runs }}</td>
+				  </tr>
+				{% endif %}
+			{% endfor %}
+		  </table>
+		{% endwith %}
 		</div>
-		<div class="four columns">
+		<div class="six columns">
+		<h6>Singles</h4>
+		{% with totals|dictsortreversed:"sing" as leaders_sing %}
+		  <table>
+			{% for item in leaders_sing %}
+				{% if item.sing >= leaders_sing.2.sing and item.sing != 0 %}
+				  <tr>
+					<td>{{ item.name }}</td><td>{{ item.sing }}</td>
+				  </tr>
+				{% endif %}
+			{% endfor %}
+		  </table>
+		{% endwith %}
+		<h6>Doubles</h4>
+		{% with totals|dictsortreversed:"doub" as leaders_doub %}
+		  <table>
+			{% for item in leaders_doub %}
+				{% if item.doub >= leaders_doub.2.doub and item.doub != 0 %}
+				  <tr>
+					<td>{{ item.name }}</td><td>{{ item.doub }}</td>
+				  </tr>
+				{% endif %}
+			{% endfor %}
+		  </table>
+		{% endwith %}
+		<h6>Triples</h4>
+		{% with totals|dictsortreversed:"trip" as leaders_trip %}
+		  <table>
+			{% for item in leaders_trip %}
+				{% if item.trip >= leaders_trip.2.trip and item.trip != 0 %}
+				  <tr>
+					<td>{{ item.name }}</td><td>{{ item.trip }}</td>
+				  </tr>
+				{% endif %}
+			{% endfor %}
+		  </table>
+		{% endwith %}
+		<h6>Walks</h4>
+		{% with totals|dictsortreversed:"bb" as leaders_bb %}
+		  <table>
+			{% for item in leaders_bb %}
+				{% if item.bb >= leaders_bb.2.bb and item.bb != 0 %}
+				  <tr>
+					<td>{{ item.name }}</td><td>{{ item.bb }}</td>
+				  </tr>
+				{% endif %}
+			{% endfor %}
+		  </table>
+		{% endwith %}
+		</div>
+		</div>
+		<div class="three columns">
 		  <h4>Upcoming games</h4>
 		  <hr>
 
@@ -108,7 +172,7 @@
 					{% if forloop.first %}
 					<li class="active">
 					  <div class="title">
-					    <h5>{{ game.DateTime|date:"N j, P" }}</h5>
+					    <h5>{{ game.when|date:"N j, P" }}</h5>
 					    <strong>At {{game.location}} vs. {{game.opponent}}</strong><br>
 					  </div>
 					  <div class="content">
@@ -121,7 +185,7 @@
 					{% else %}
 					<li>
 					  <div class="title">
-					    <h5>{{ game.DateTime|date:"N j, P" }}</h5>
+					    <h5>{{ game.when|date:"N j, P" }}</h5>
 					    <strong>At {{game.location}} vs. {{game.opponent}}</strong><br>
 					  </div>
 					  <div class="content">
